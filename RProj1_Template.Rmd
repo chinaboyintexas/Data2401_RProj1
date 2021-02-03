@@ -6,6 +6,8 @@ output:
   html_document: 
     fig_width: 6
     fig_height: 6
+    highlight: kate
+    theme: cosmo
 ---
 
 MAKE SURE YOU READ AND FOLLOW **ALL** INSTRUCTIONS ON THE INSTRUCTION DOCUMENT. 
@@ -19,16 +21,18 @@ library(datasauRus)
 
 
 ### Exercise 1
-
+Based on the help file, how many rows and how many columns does the datasaurus_dozen file have?  
+What are the variables included in the data frame?  
+  
 |__Rows__|__Columns__|__Varibles List__|
 |:------------|:------------|:------------|
-|1846|3|dataset, x, y|
+|1846|3|dataset, x, y|  
 
-### Exercise 2
+### Exercise 2  
 
 First, let's plot the data in the dino dataset:  
   
-Filter for data matching "dino" using dataset datasaurus_dozen, marked with pipe operator.  
+>Ryan's Notes: Filter for data matching "dino" using dataset datasaurus_dozen, marked with pipe operator.   
 Visualize using ggplot(data,mapping = aes_thetics(x = column_from_data,y = column_from_data) + define_plot_point_shape)  
 
 ```{r plot-dino}
@@ -109,7 +113,7 @@ facet_wrap(~ dataset, ncol = 3) + # facet the dataset variable, in 3 cols
 theme(legend.position = "none")
 ```
   
-And we can use the group_by function to generate all the summary correlation coefficients.
+And we can use the group_by function to generate and display all the summary correlation coefficients.
 
 ```{r}
 datasaurus_dozen %>%
