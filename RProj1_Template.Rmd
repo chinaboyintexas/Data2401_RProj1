@@ -2,7 +2,10 @@
 title: "Project 1 - Hello _R_ You There"
 author: "Ryan Cheung"
 date: "Due Fed 3rd"
-output: html_document
+output: 
+  html_document: 
+    fig_width: 6
+    fig_height: 6
 ---
 
 MAKE SURE YOU READ AND FOLLOW **ALL** INSTRUCTIONS ON THE INSTRUCTION DOCUMENT. 
@@ -28,7 +31,7 @@ First, let's plot the data in the dino dataset:
 Filter for data matching "dino" using dataset datasaurus_dozen, marked with pipe operator.  
 Visualize using ggplot(data,mapping = aes_thetics(x = column_from_data,y = column_from_data) + define_plot_point_shape)  
 
-```{r plot-dino, fig.height=6, fig.width=6}
+```{r plot-dino}
 dino_data <- datasaurus_dozen %>%
   filter(dataset == "dino")
 ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
@@ -47,7 +50,7 @@ dino_cor
 
 Now, let's plot the 'star' data.
 
-```{r plot-star, fig.height=6, fig.width=6}
+```{r plot-star}
 star_data <- datasaurus_dozen %>%
   filter(dataset == "star")
 ggplot(data = star_data, mapping = aes(x = x, y = y)) +
@@ -73,7 +76,7 @@ dino_star_diff
 
 Next, let's plot the 'circle' data.
 
-```{r plot-circle, fig.height=6, fig.width=6}
+```{r plot-circle}
 circle_data <- datasaurus_dozen %>%
   filter(dataset == "circle")
 ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
@@ -99,12 +102,13 @@ dino_circle_diff
 
 Finally, let’s plot all datasets at once and calculate their summary correlation coefficients. In order to do this we will make use of _facetting_.
 
-```{r plot-all, fig.height=6, fig.width=6}
+```{r plot-all, fig.height=8, fig.width=8}
 ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
 geom_point()+
 facet_wrap(~ dataset, ncol = 3) + # facet the dataset variable, in 3 cols
 theme(legend.position = "none")
 ```
+  
 And we can use the group_by function to generate all the summary correlation coefficients.
 
 ```{r}
