@@ -35,11 +35,12 @@ ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-And next, calculate the correlation between `x` and `y` in this dataset:
+And next, calculate the correlation between `x` and `y` in this dataset, then store and display as varible "dino_cor":
 
 ```{r cor-dino}
-dino_data %>%
+dino_cor <- dino_data %>%
   summarize(r = cor(x, y))
+dino_cor
 ```
 
 ### Exercise 3
@@ -53,27 +54,63 @@ ggplot(data = star_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-And also calculate the correlation coefficient between x and y in the 'star' data.
+And also calculate the correlation coefficient between x and y in the 'star' data, then store and display as variable "star_cor".
  
 ```{r cor-star}
-star_data %>%
+star_cor <- star_data %>%
   summarize(r = cor(x, y))
+star_cor
+```
+
+The correlation values from dino_data (-0.06447185) and star_data (-0.0629611) are very similar, around 2.343% difference.
+
+```{r simple-comparison-dino-star}
+dino_star_diff <- (-0.06447185--0.0629611)/-0.06447185
+dino_star_diff
 ```
 
 ### Exercise 4
 
-(Add code and narrative as needed. Note that two R chunks are given but they are not labeled. Use the convention from above to name them appropriately.)
+Next, let's plot the 'circle' data.
 
-```{r}
-
-
+```{r plot-circle, fig.height=6, fig.width=6}
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle")
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
-```{r}
+And also calculate the correlation coefficient between x and y in the 'circle' data, then store and display as variable "circle_cor".
+ 
+```{r cor-circle}
+circle_cor <- circle_data %>%
+  summarize(r = cor(x, y))
+circle_cor
+```
 
+The correlation values from dino_data (-0.06447185) and circle_data (-0.06834336) are also similar, but not as similar as the dino/star data; around 6.005% difference.
 
+```{r simple-comparison-dino-circle}
+dino_circle_diff <- (-0.06447185--0.06834336)/-0.06447185
+dino_circle_diff
 ```
 
 ### Exercise 5
 
-(Add code and narrative as needed. To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, with the green +C.)
+Finally, let’s plot all datasets at once and calculate their summary correlation coefficients. In order to do this we will make use of _facetting_.
+
+```{r plot-all, fig.height=6, fig.width=6}
+ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
+geom_point()+
+facet_wrap(~ dataset, ncol = 3) + # facet the dataset variable, in 3 cols
+theme(legend.position = "none")
+```
+And we can use the group_by function to generate all the summary correlation coefficients.
+
+```{r}
+datasaurus_dozen %>%
+group_by(dataset) %>%
+summarize(r = cor(x, y)) %>%
+print(13)
+```
+
