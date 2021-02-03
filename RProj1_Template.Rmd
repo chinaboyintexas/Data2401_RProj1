@@ -23,9 +23,10 @@ library(datasauRus)
 
 ### Exercise 2
 
-First, let's plot the data in the dino dataset.
-Filter for data matching "dino" using dataset datasaurus_dozen, marked with pipe operator.
-Visualize using ggplot(data,mapping = aes_thetics(x = column_from_data,y = column_from_data) + define_plot_point_shape)
+First, let's plot the data in the dino dataset:  
+  
+Filter for data matching "dino" using dataset datasaurus_dozen, marked with pipe operator.  
+Visualize using ggplot(data,mapping = aes_thetics(x = column_from_data,y = column_from_data) + define_plot_point_shape)  
 
 ```{r plot-dino, fig.height=6, fig.width=6}
 dino_data <- datasaurus_dozen %>%
@@ -43,20 +44,20 @@ dino_data %>%
 
 ### Exercise 3
 
-(Add code and narrative as needed. Note that the R chunks are labeled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient. To finish, remember to clean up the narrative by removing these instructions.)
+Now, let's plot the 'star' data.
 
-
-
-```{r plot-star}
-
-
+```{r plot-star, fig.height=6, fig.width=6}
+star_data <- datasaurus_dozen %>%
+  filter(dataset == "star")
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
-I'm some text, you should replace me with more meaningful text...
+And also calculate the correlation coefficient between x and y in the 'star' data.
  
 ```{r cor-star}
-
-
+star_data %>%
+  summarize(r = cor(x, y))
 ```
 
 ### Exercise 4
